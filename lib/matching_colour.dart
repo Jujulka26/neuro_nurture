@@ -48,20 +48,20 @@ class _MatchingColourScreenState extends State<MatchingColourScreen> with Ticker
   final Random _random = Random();
 
   final List<Item> allItems = [
-    Item(name: 'Apple', color: 'red', image: 'assets/apple.png'),
-    Item(name: 'Durian', color: 'green', image: 'assets/durian.png'),
-    Item(name: 'Blueberry', color: 'blue', image: 'assets/blueberry.png'),
-    Item(name: 'Orange', color: 'orange', image: 'assets/orange.png'),
-    Item(name: 'Elephant', color: 'blue', image: 'assets/elephant.png'),
-    Item(name: 'Tiger', color: 'orange', image: 'assets/tiger.png'),
-    Item(name: 'Lemon', color: 'yellow', image: 'assets/lemon.png'),
-    Item(name: 'Dragon Fruit', color: 'pink', image: 'assets/dragon fruit.png'),
-    Item(name: 'Grape', color: 'purple', image: 'assets/grape.png'),
-    Item(name: 'Dragon', color: 'red', image: 'assets/dragon.png'),
-    Item(name: 'Duck', color: 'yellow', image: 'assets/duck.png'),
-    Item(name: 'Turtle', color: 'green', image: 'assets/turtle.png'),
-    Item(name: 'Axolotl', color: 'pink', image: 'assets/axolotl.png'),
-    Item(name: 'Jellyfish', color: 'purple', image: 'assets/jellyfish.png'),
+    Item(name: 'Apple', color: 'red', image: 'assets/images/fruits/apple.png'),
+    Item(name: 'Durian', color: 'green', image: 'assets/images/fruits/durian.png'),
+    Item(name: 'Blueberry', color: 'blue', image: 'assets/images/fruits/blueberry.png'),
+    Item(name: 'Orange', color: 'orange', image: 'assets/images/fruits/orange.png'),
+    Item(name: 'Elephant', color: 'blue', image: 'assets/images/animals/elephant.png'),
+    Item(name: 'Tiger', color: 'orange', image: 'assets/images/animals/tiger.png'),
+    Item(name: 'Lemon', color: 'yellow', image: 'assets/images/fruits/lemon.png'),
+    Item(name: 'Dragon Fruit', color: 'pink', image: 'assets/images/fruits/dragon fruit.png'),
+    Item(name: 'Grape', color: 'purple', image: 'assets/images/fruits/grape.png'),
+    Item(name: 'Dragon', color: 'red', image: 'assets/images/animals/dragon.png'),
+    Item(name: 'Duck', color: 'yellow', image: 'assets/images/animals/duck.png'),
+    Item(name: 'Turtle', color: 'green', image: 'assets/images/animals/turtle.png'),
+    Item(name: 'Axolotl', color: 'pink', image: 'assets/images/animals/axolotl.png'),
+    Item(name: 'Jellyfish', color: 'purple', image: 'assets/images/animals/jellyfish.png'),
   ];
 
   late List<String> availableColors;
@@ -78,10 +78,23 @@ class _MatchingColourScreenState extends State<MatchingColourScreen> with Ticker
   final Set<int> _tappedCorrectIndices = {};
   bool _isInstructionVoicePlaying = false;
 
+  String _colorVoice(String color) {
+    switch (color.toLowerCase()) {
+      case 'red': return 'audio/voiceovers/red voice over.mp3';
+      case 'blue': return 'audio/voiceovers/blue voice over.mp3';
+      case 'green': return 'audio/voiceovers/green voice over.mp3';
+      case 'yellow': return 'audio/voiceovers/yellow voice over.mp3';
+      case 'orange': return 'audio/voiceovers/orange voice over.mp3';
+      case 'pink': return 'audio/voiceovers/pink voice over.mp3';
+      case 'purple': return 'audio/voiceovers/purple voice over.mp3';
+      default: return '';
+    }
+  }
+
   @override
   void initState() {
     super.initState();
-    MusicController().changeBackgroundMusic('Piki - Healing Spell (freetouse.com).mp3', fadeIn: true);
+    MusicController().changeBackgroundMusic('audio/music/Piki - Healing Spell (freetouse.com).mp3', fadeIn: true);
     availableColors = allItems.map((e) => e.color).toSet().toList();
     _generateQuestions();
     _revealItems();
@@ -303,7 +316,7 @@ class _MatchingColourScreenState extends State<MatchingColourScreen> with Ticker
     });
 
     try {
-      await _soundController.playSfx('choose voice over.mp3');
+      await _soundController.playSfx('audio/voiceovers/choose voice over.mp3');
       if (!mounted || !_isInstructionVoicePlaying) {
         return;
       }
@@ -320,7 +333,7 @@ class _MatchingColourScreenState extends State<MatchingColourScreen> with Ticker
 
         int count = question.targetColorCounts[color]!;
         if (colorCountIndex > 0) {
-          await _soundController.playSfx('and voice over.mp3');
+          await _soundController.playSfx('audio/voiceovers/and voice over.mp3');
           if (!mounted || !_isInstructionVoicePlaying) {
             return;
           }
@@ -330,7 +343,7 @@ class _MatchingColourScreenState extends State<MatchingColourScreen> with Ticker
           }
         }
 
-        String countFile = count == 1 ? 'one voice over.mp3' : count == 2 ? 'two voice over.mp3' : '';
+        String countFile = count == 1 ? 'audio/voiceovers/one voice over.mp3' : count == 2 ? 'audio/voiceovers/two voice over.mp3' : '';
         if (countFile.isNotEmpty) {
           await _soundController.playSfx(countFile);
           if (!mounted || !_isInstructionVoicePlaying) {
@@ -342,7 +355,7 @@ class _MatchingColourScreenState extends State<MatchingColourScreen> with Ticker
           }
         }
 
-        await _soundController.playSfx('$color voice over.mp3');
+        await _soundController.playSfx(_colorVoice(color));
         if (!mounted || !_isInstructionVoicePlaying) {
           return;
         }
@@ -357,7 +370,7 @@ class _MatchingColourScreenState extends State<MatchingColourScreen> with Ticker
       if (!mounted || !_isInstructionVoicePlaying) {
         return;
       }
-      String finalFile = question.numCorrectAnswers > 1 ? 'colours voice over.mp3' : 'colour voice over.mp3';
+      String finalFile = question.numCorrectAnswers > 1 ? 'audio/voiceovers/colours voice over.mp3' : 'audio/voiceovers/colour voice over.mp3';
       await _soundController.playSfx(finalFile);
 
     } catch (e) {
@@ -406,7 +419,7 @@ class _MatchingColourScreenState extends State<MatchingColourScreen> with Ticker
           return;
         }
 
-        await _soundController.playSfx('${item.color} voice over.mp3');
+        await _soundController.playSfx(_colorVoice(item.color));
 
         if (!mounted) {
           return;
@@ -446,7 +459,7 @@ class _MatchingColourScreenState extends State<MatchingColourScreen> with Ticker
       _wrongAnswerController.reset();
       await _wrongAnswerController.forward();
 
-      String voiceFile = _voiceToggle == 0 ? 'good try voice over.mp3' : 'try again voice over.mp3';
+      String voiceFile = _voiceToggle == 0 ? 'audio/voiceovers/good try voice over.mp3' : 'audio/voiceovers/try again voice over.mp3';
       _voiceToggle = 1 - _voiceToggle;
       await _soundController.playSfx(voiceFile);
       if (!mounted) {
@@ -487,7 +500,7 @@ class _MatchingColourScreenState extends State<MatchingColourScreen> with Ticker
           actions: <Widget>[
             ElevatedButton(
               onPressed: () async {
-                await _soundController.playSfx('click sound.mp3');
+                await _soundController.playSfx('audio/sfx/click sound.mp3');
                 if (!dialogContext.mounted) {
                   return;
                 }
@@ -529,7 +542,7 @@ class _MatchingColourScreenState extends State<MatchingColourScreen> with Ticker
         FirestoreService().saveGameScore(userId: userId, gameName: 'Colour Match', score: finalScore100);
       }
 
-      await _soundController.playSfx('awesome voice over.mp3');
+      await _soundController.playSfx('audio/voiceovers/awesome voice over.mp3');
       if (!mounted) {
         return;
       }
@@ -561,7 +574,7 @@ class _MatchingColourScreenState extends State<MatchingColourScreen> with Ticker
                     alignment: Alignment.centerRight,
                     child: TextButton(
                       onPressed: () async {
-                        await _soundController.playSfx('click sound.mp3');
+                        await _soundController.playSfx('audio/sfx/click sound.mp3');
                         if (!dialogContext.mounted) {
                           return;
                         }
@@ -624,7 +637,7 @@ class _MatchingColourScreenState extends State<MatchingColourScreen> with Ticker
     _stopInstructionVoice();
     _wrongAnswerController.dispose();
     _correctAnswerController.dispose();
-    MusicController().changeBackgroundMusic('background music.mp3', fadeIn: false);
+    MusicController().changeBackgroundMusic('audio/music/background music.mp3', fadeIn: false);
     super.dispose();
   }
 
@@ -636,7 +649,7 @@ class _MatchingColourScreenState extends State<MatchingColourScreen> with Ticker
         body: Stack(
           fit: StackFit.expand,
           children: [
-            Image.asset('assets/matching colour background image.png', fit: BoxFit.cover),
+            Image.asset('assets/images/ui/matching colour background image.png', fit: BoxFit.cover),
             const Center(child: CircularProgressIndicator()),
           ],
         ),
@@ -700,7 +713,7 @@ class _MatchingColourScreenState extends State<MatchingColourScreen> with Ticker
       body: Stack(
         fit: StackFit.expand,
         children: [
-          Image.asset('assets/matching colour background image.png', fit: BoxFit.cover),
+          Image.asset('assets/images/ui/matching colour background image.png', fit: BoxFit.cover),
           Column(
             children: [
               const SizedBox(height: 40),
@@ -709,9 +722,9 @@ class _MatchingColourScreenState extends State<MatchingColourScreen> with Ticker
                 child: Row(
                   children: [
                     GestureDetector(onTap: () {
-                      _soundController.playSfx('click sound.mp3');
+                      _soundController.playSfx('audio/sfx/click sound.mp3');
                       Navigator.pop(context);
-                    }, child: Image.asset('assets/back button.png', width: 50, height: 50)),
+                    }, child: Image.asset('assets/images/ui/back button.png', width: 50, height: 50)),
                     const Spacer(),
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
@@ -738,7 +751,7 @@ class _MatchingColourScreenState extends State<MatchingColourScreen> with Ticker
           if (_showWrongAnswerAnimation)
             Center(
               child: Lottie.asset(
-                'assets/wrong.json',
+                'assets/animations/wrong.json',
                 width: 200,
                 height: 200,
                 fit: BoxFit.contain,
@@ -749,7 +762,7 @@ class _MatchingColourScreenState extends State<MatchingColourScreen> with Ticker
           if (_showCorrectAnswerAnimation)
             Center(
               child: Lottie.asset(
-                'assets/correct.json',
+                'assets/animations/correct.json',
                 width: 200,
                 height: 200,
                 fit: BoxFit.contain,

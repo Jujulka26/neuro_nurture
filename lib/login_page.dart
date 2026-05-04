@@ -137,7 +137,7 @@ class _LoginPageState extends State<LoginPage> {
                           child: Padding(
                             padding: const EdgeInsets.only(top: 8.0),
                             child: Image.asset(
-                              'assets/logo.png',
+                              'assets/images/ui/logo.png',
                               width: 100,
                               height: 100,
                             ),

@@ -143,7 +143,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               Positioned(
                                 top: 20,
                                 child: Image.asset(
-                                  'assets/logo.png',
+                                  'assets/images/ui/logo.png',
                                   width: 100,
                                   height: 100,
                                 ),
@@ -159,7 +159,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                     );
                                   },
                                   child: Image.asset(
-                                    'assets/back button.png',
+                                    'assets/images/ui/back button.png',
                                     width: 50,
                                     height: 50,
                                   ),

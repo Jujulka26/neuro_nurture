@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../controllers/sound_controller.dart';
-import '../controllers/music_controller.dart';
+import 'controllers/sound_controller.dart';
+import 'controllers/music_controller.dart';
 
 class ShapeGame extends StatefulWidget {
   const ShapeGame({super.key});
@@ -28,22 +28,22 @@ class ShapeGameState extends State<ShapeGame> with TickerProviderStateMixin {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   final List<ShapeData> baseShapes = const [
-    ShapeData(id: 'square', imagePath: 'assets/square3.png'),
-    ShapeData(id: 'triangle', imagePath: 'assets/triangle4.png'),
-    ShapeData(id: 'circle', imagePath: 'assets/circle1.png'),
+    ShapeData(id: 'square', imagePath: 'assets/images/shapes/square3.png'),
+    ShapeData(id: 'triangle', imagePath: 'assets/images/shapes/triangle4.png'),
+    ShapeData(id: 'circle', imagePath: 'assets/images/shapes/circle1.png'),
   ];
 
   final List<ShapeData> baseCuteShapes = const [
-    ShapeData(id: 'square', imagePath: 'assets/squareCute1.png'),
-    ShapeData(id: 'triangle', imagePath: 'assets/triangleCute1.png'),
-    ShapeData(id: 'circle', imagePath: 'assets/circleCute1.png'),
+    ShapeData(id: 'square', imagePath: 'assets/images/shapes/squareCute1.png'),
+    ShapeData(id: 'triangle', imagePath: 'assets/images/shapes/triangleCute1.png'),
+    ShapeData(id: 'circle', imagePath: 'assets/images/shapes/circleCute1.png'),
   ];
 
   @override
   void initState() {
     super.initState();
     _soundController.init();
-    _musicController.changeBackgroundMusic('Piki - Kitty (freetouse.com).mp3', fadeIn: true);
+    _musicController.changeBackgroundMusic('audio/music/Piki - Kitty (freetouse.com).mp3', fadeIn: true);
     _initializeGame();
     _initializeAnimations();
   }
@@ -53,7 +53,7 @@ class ShapeGameState extends State<ShapeGame> with TickerProviderStateMixin {
     for (var controller in animationControllers) {
       controller.dispose();
     }
-    _musicController.changeBackgroundMusic('background music.mp3', fadeIn: false);
+    _musicController.changeBackgroundMusic('audio/music/background music.mp3', fadeIn: false);
     super.dispose();
   }
 
@@ -96,16 +96,16 @@ class ShapeGameState extends State<ShapeGame> with TickerProviderStateMixin {
     String soundPath;
     switch (soundType) {
       case 'click':
-        soundPath = 'click sound.mp3';
+        soundPath = 'audio/sfx/click sound.mp3';
         break;
       case 'correct':
-        soundPath = 'correct sound.mp3';
+        soundPath = 'audio/sfx/correct sound.mp3';
         break;
       case 'wrong':
-        soundPath = 'wrong sound.mp3';
+        soundPath = 'audio/sfx/wrong sound.mp3';
         break;
       case 'gameOver':
-        soundPath = 'gameover sound.mp3';
+        soundPath = 'audio/sfx/gameover sound.mp3';
         break;
       default:
         return;
@@ -242,7 +242,7 @@ class ShapeGameState extends State<ShapeGame> with TickerProviderStateMixin {
                   alignment: Alignment.center,
                   child: ElevatedButton(
                     onPressed: () async {
-                      await _soundController.playSfx('click sound.mp3');
+                      await _soundController.playSfx('audio/sfx/click sound.mp3');
                       if (!dialogContext.mounted) return;
                       Navigator.of(dialogContext).pop();
                       onPressed();
@@ -285,8 +285,7 @@ class ShapeGameState extends State<ShapeGame> with TickerProviderStateMixin {
         'timestamp': FieldValue.serverTimestamp(),
       });
     } catch (e) {
-      // You might want to show a SnackBar or other UI feedback in a real app
-      // For now, we'll just acknowledge the error.
+      // ignore save errors
     }
   }
 
@@ -322,7 +321,7 @@ class ShapeGameState extends State<ShapeGame> with TickerProviderStateMixin {
           GestureDetector(
             onTap: _handleBackPage,
             child: Image.asset(
-              'assets/back button.png',
+              'assets/images/ui/back button.png',
               width: 50,
               height: 50,
             ),

@@ -66,72 +66,14 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-    - assets/play button.png
-    - assets/group the shape.png
-    - assets/matching colour.png
-    - assets/sort number.png
-    - assets/logo.png
-    - assets/setting icon.png
-    - assets/game icon.png
-    - assets/dashboard icon.png
-    - assets/back button.png
-    - assets/matching colour background image.png
-    - assets/asc background image.png
-    - assets/desc background image.png
-    #fruit
-    - assets/apple.png #red
-    - assets/lemon.png #yellow
-    - assets/durian.png #green
-    - assets/blueberry.png #blue
-    - assets/orange.png #orange
-    - assets/dragon fruit.png #pink
-    - assets/grape.png #purple
-    #animal
-    - assets/dragon.png #red
-    - assets/duck.png #yellow
-    - assets/turtle.png #green
-    - assets/elephant.png # blue
-    - assets/tiger.png #orange
-    - assets/axolotl.png #pink
-    - assets/jellyfish.png #purple
-    #music and sound
-    - assets/background music.mp3
-    - assets/Piki - Happy Walking (freetouse.com).mp3
-    - assets/Piki - Healing Spell (freetouse.com).mp3
-    - assets/Piki - Kitty (freetouse.com).mp3
-    - assets/click sound.mp3
-    - assets/red voice over.mp3
-    - assets/yellow voice over.mp3
-    - assets/green voice over.mp3
-    - assets/blue voice over.mp3
-    - assets/orange voice over.mp3
-    - assets/pink voice over.mp3
-    - assets/purple voice over.mp3
-    - assets/choose voice over.mp3
-    - assets/one voice over.mp3
-    - assets/two voice over.mp3
-    - assets/and voice over.mp3
-    - assets/colour voice over.mp3
-    - assets/colours voice over.mp3
-    - assets/good try voice over.mp3
-    - assets/try again voice over.mp3
-    - assets/sparkle effect.json
-    - assets/loading.json
-    - assets/wrong.json
-    - assets/correct.json
-    - assets/awesome voice over.mp3
-    - assets/square3.png
-    - assets/triangle4.png
-    - assets/circle1.png
-    - assets/squareCute1.png
-    - assets/triangleCute1.png
-    - assets/circleCute1.png
-    - assets/correct sound.mp3
-    - assets/wrong sound.mp3
-    - assets/gameover sound.mp3
-    - assets/put sound.mp3
-    - assets/large to small voice over.mp3
-    - assets/small to large voice over.mp3
+    - assets/images/ui/
+    - assets/images/fruits/
+    - assets/images/animals/
+    - assets/images/shapes/
+    - assets/audio/music/
+    - assets/audio/sfx/
+    - assets/audio/voiceovers/
+    - assets/animations/
 
 
 

@@ -32,7 +32,7 @@ class MusicController with WidgetsBindingObserver {
 
     await _loadMusicPreference();
 
-    await _bgmPlayer.setSource(AssetSource('background music.mp3'));
+    await _bgmPlayer.setSource(AssetSource('audio/music/background music.mp3'));
     await _bgmPlayer.setReleaseMode(ReleaseMode.loop);
     _isInitialized = true;
 
@@ -93,14 +93,13 @@ class MusicController with WidgetsBindingObserver {
     }
   }
 
-  // Helper method to get the correct volume for any music asset
   double _getVolumeForAsset(String musicAsset) {
-    if (musicAsset == 'background music.mp3') {
-      return 0.2; // Main background music
-    } else if (musicAsset == 'Piki - Healing Spell (freetouse.com).mp3') {
-      return 0.03; // Matching color game
+    if (musicAsset == 'audio/music/background music.mp3') {
+      return 0.2;
+    } else if (musicAsset == 'audio/music/Piki - Healing Spell (freetouse.com).mp3') {
+      return 0.03;
     } else {
-      return 0.04; // Other games default
+      return 0.04;
     }
   }
 
@@ -111,7 +110,6 @@ class MusicController with WidgetsBindingObserver {
       await init();
     }
 
-    // Set default volume based on the music file
     double volumeToUse;
     if (targetVolume != null) {
       volumeToUse = targetVolume;
@@ -119,15 +117,12 @@ class MusicController with WidgetsBindingObserver {
       volumeToUse = _getVolumeForAsset(newMusicAsset);
     }
 
-    // Check if we need to change the source
     bool needsSourceChange = true;
     try {
-      // Compare sources properly - you might need to adjust this based on your AudioPlayer version
       if (_bgmPlayer.source != null && _bgmPlayer.source.toString() == newSource.toString()) {
         needsSourceChange = false;
       }
     } catch (e) {
-      // If comparison fails, assume we need to change
       needsSourceChange = true;
     }
 
@@ -139,29 +134,23 @@ class MusicController with WidgetsBindingObserver {
 
     if (_isMusicOn) {
       if (fadeIn) {
-        // Always start fade from a low volume, regardless of current volume
         await _bgmPlayer.setVolume(0.01);
         _currentVolume = 0.01;
 
-        // Start playing if not already playing
         if (_bgmPlayer.state != PlayerState.playing) {
           await _bgmPlayer.resume();
         }
 
-        // Then fade to target volume
         await fadeInMusic(targetVolume: volumeToUse, duration: const Duration(seconds: 1));
       } else {
-        // Set volume directly to target volume
         _currentVolume = volumeToUse;
         await _bgmPlayer.setVolume(_currentVolume);
 
-        // Start playing if not already playing
         if (_bgmPlayer.state != PlayerState.playing) {
           await _bgmPlayer.resume();
         }
       }
     } else {
-      // Even if music is off, update the current volume so it's ready when turned on
       _currentVolume = volumeToUse;
       await _bgmPlayer.pause();
     }

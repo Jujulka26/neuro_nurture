@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'matching_colour.dart';
 import 'sorting_number.dart';
 import 'matching_shape.dart';
-import '../controllers/sound_controller.dart';
+import 'controllers/sound_controller.dart';
 import 'loading_screen.dart';
 
 class GamePage extends StatefulWidget {
@@ -16,7 +16,7 @@ class _GamePageState extends State<GamePage> {
   final SoundController _soundController = SoundController();
 
   void _playClickSound() {
-    _soundController.playSfx('click sound.mp3');
+    _soundController.playSfx('audio/sfx/click sound.mp3');
   }
 
   @override
@@ -41,7 +41,7 @@ class _GamePageState extends State<GamePage> {
                           Navigator.pop(context);
                         },
                         child: Image.asset(
-                          'assets/back button.png',
+                          'assets/images/ui/back button.png',
                           width: 50,
                           height: 50,
                         ),
@@ -69,7 +69,7 @@ class _GamePageState extends State<GamePage> {
                     _buildGameCard(
                       context,
                       "Group the Shapes",
-                      "assets/group the shape.png",
+                      'assets/images/ui/group the shape.png',
                           () {
                         _playClickSound();
                         Navigator.push(
@@ -87,7 +87,7 @@ class _GamePageState extends State<GamePage> {
                     _buildGameCard(
                       context,
                       "Colour Match",
-                      "assets/matching colour.png",
+                      'assets/images/ui/matching colour.png',
                           () {
                         _playClickSound();
                         Navigator.push(
@@ -105,7 +105,7 @@ class _GamePageState extends State<GamePage> {
                     _buildGameCard(
                       context,
                       "Sort the Numbers",
-                      "assets/sort number.png",
+                      'assets/images/ui/sort number.png',
                           () {
                         _playClickSound();
                         Navigator.push(
@@ -146,7 +146,7 @@ class _GamePageState extends State<GamePage> {
             borderRadius: BorderRadius.circular(18),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withAlpha((255 * 0.1).round()), // Using withAlpha
+                color: Colors.black.withAlpha((255 * 0.1).round()),
                 blurRadius: 10,
                 spreadRadius: 2,
                 offset: const Offset(2, 6),

@@ -59,7 +59,7 @@ class _StartPageState extends State<StartPage> with SingleTickerProviderStateMix
   }
 
   void _playClickSound() {
-    _soundController.playSfx('click sound.mp3');
+    _soundController.playSfx('audio/sfx/click sound.mp3');
   }
 
   void _navigateToMainPage() {
@@ -81,7 +81,7 @@ class _StartPageState extends State<StartPage> with SingleTickerProviderStateMix
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
-                  'assets/logo.png',
+                  'assets/images/ui/logo.png',
                   height: 200,
                 ),
                 const SizedBox(height: 40),
@@ -101,7 +101,7 @@ class _StartPageState extends State<StartPage> with SingleTickerProviderStateMix
                       scaleX: _scaleX.value,
                       scaleY: _scaleY.value,
                       child: Image.asset(
-                        'assets/play button.png',
+                        'assets/images/ui/play button.png',
                         width: 100,
                         height: 100,
                       ),

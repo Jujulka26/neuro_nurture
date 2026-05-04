@@ -19,7 +19,7 @@ class _NumberSortingGameState extends State<NumberSortingGame> with SingleTicker
   int _currentQuestion = 1;
   final int _totalQuestions = 8;
   bool _isAscending = true;
-  String _backgroundImagePath = 'assets/asc background image.png';
+  String _backgroundImagePath = 'assets/images/ui/asc background image.png';
   final Random _random = Random();
   int _score = 0;
   int _incorrectDrops = 0;
@@ -35,14 +35,14 @@ class _NumberSortingGameState extends State<NumberSortingGame> with SingleTicker
     _animationController = AnimationController(vsync: this, duration: const Duration(milliseconds: 700));
     _scaleAnimation = Tween<double>(begin: 1.1, end: 1.0).animate(CurvedAnimation(parent: _animationController, curve: Curves.easeOut));
     _soundController.init();
-    _musicController.changeBackgroundMusic('Piki - Happy Walking (freetouse.com).mp3', fadeIn: true);
+    _musicController.changeBackgroundMusic('audio/music/Piki - Happy Walking (freetouse.com).mp3', fadeIn: true);
     _generateQuestion(_currentQuestion);
   }
 
   @override
   void dispose() {
     _animationController.dispose();
-    _musicController.changeBackgroundMusic('background music.mp3', fadeIn: false);
+    _musicController.changeBackgroundMusic('audio/music/background music.mp3', fadeIn: false);
     super.dispose();
   }
 
@@ -55,8 +55,8 @@ class _NumberSortingGameState extends State<NumberSortingGame> with SingleTicker
     bool wasAscending = _isAscending;
 
     _isAscending = questionNumber <= 6;
-    _backgroundImagePath = _isAscending ? 'assets/asc background image.png' : 'assets/desc background image.png';
-    _playVoiceOver(_isAscending ? 'small to large voice over.mp3' : 'large to small voice over.mp3');
+    _backgroundImagePath = _isAscending ? 'assets/images/ui/asc background image.png' : 'assets/images/ui/desc background image.png';
+    _playVoiceOver(_isAscending ? 'audio/voiceovers/small to large voice over.mp3' : 'audio/voiceovers/large to small voice over.mp3');
 
     if (_isAscending) {
       if (questionNumber <= 2) {
@@ -98,7 +98,7 @@ class _NumberSortingGameState extends State<NumberSortingGame> with SingleTicker
         _numbersToDrag.remove(draggedNumber);
         _sortedSlots[targetIndex] = draggedNumber;
         _score++;
-        _playSound('put sound.mp3');
+        _playSound('audio/sfx/put sound.mp3');
 
         if (_numbersToDrag.isEmpty && _sortedSlots.every((e) => e != null)) {
           if (_currentQuestion == 6) {
@@ -113,7 +113,7 @@ class _NumberSortingGameState extends State<NumberSortingGame> with SingleTicker
     } else {
       setState(() {
         _incorrectDrops++;
-        _playSound('wrong sound.mp3');
+        _playSound('audio/sfx/wrong sound.mp3');
       });
     }
   }
@@ -131,7 +131,7 @@ class _NumberSortingGameState extends State<NumberSortingGame> with SingleTicker
         actions: <Widget>[
           ElevatedButton(
             onPressed: () {
-              _playSound('click sound.mp3');
+              _playSound('audio/sfx/click sound.mp3');
               Navigator.of(dialogContext).pop();
               _currentQuestion++;
               _generateQuestion(_currentQuestion);
@@ -149,7 +149,7 @@ class _NumberSortingGameState extends State<NumberSortingGame> with SingleTicker
     double normalizedScore = (rawCalculatedScore / _maxPossibleRawScore) * 100;
     int finalScore100 = normalizedScore.round().clamp(0, 100);
 
-    if (isGameComplete) _playVoiceOver('awesome voice over.mp3');
+    if (isGameComplete) _playVoiceOver('audio/voiceovers/awesome voice over.mp3');
 
     showDialog(
       context: context,
@@ -174,7 +174,7 @@ class _NumberSortingGameState extends State<NumberSortingGame> with SingleTicker
         actions: <Widget>[
           ElevatedButton(
             onPressed: () async {
-              _playSound('click sound.mp3');
+              _playSound('audio/sfx/click sound.mp3');
               Navigator.of(dialogContext).pop();
               if (isGameComplete) {
                 final String? userId = FirebaseAuth.instance.currentUser?.uid;
@@ -243,10 +243,10 @@ class _NumberSortingGameState extends State<NumberSortingGame> with SingleTicker
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       GestureDetector(
-                        onTap: () { _playSound('click sound.mp3'); Navigator.pop(context); },
+                        onTap: () { _playSound('audio/sfx/click sound.mp3'); Navigator.pop(context); },
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Image.asset('assets/back button.png', width: 50, height: 50),
+                          child: Image.asset('assets/images/ui/back button.png', width: 50, height: 50),
                         ),
                       ),
                       Container(

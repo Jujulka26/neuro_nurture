@@ -460,7 +460,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   GestureDetector(
                     onTap: () => Navigator.pop(context),
                     child: Image.asset(
-                      'assets/back button.png',
+                      'assets/images/ui/back button.png',
                       height: 50,
                       width: 50,
                     ),

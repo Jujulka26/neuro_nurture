@@ -34,7 +34,7 @@ class _MainPageState extends State<MainPage> {
   }
 
   void _playClickSound() {
-    _soundController.playSfx('click sound.mp3');
+    _soundController.playSfx('audio/sfx/click sound.mp3');
   }
 
   void _openSettings() {
@@ -113,7 +113,7 @@ class _MainPageState extends State<MainPage> {
               actions: <Widget>[
                 TextButton(
                   onPressed: () {
-                    _soundController.playSfx('click sound.mp3');
+                    _soundController.playSfx('audio/sfx/click sound.mp3');
                     if (!dialogContext.mounted) return;
                     Navigator.of(dialogContext).pop();
                   },
@@ -130,7 +130,7 @@ class _MainPageState extends State<MainPage> {
                       setState(() {
                         errorMessage = 'User not logged in. Please re-login.';
                       });
-                      _soundController.playSfx('click sound.mp3');
+                      _soundController.playSfx('audio/sfx/click sound.mp3');
                       return;
                     }
 
@@ -142,12 +142,12 @@ class _MainPageState extends State<MainPage> {
                         setState(() {
                           errorMessage = 'No PIN set for this user. Please set it via login/signup.';
                         });
-                        _soundController.playSfx('click sound.mp3');
+                        _soundController.playSfx('audio/sfx/click sound.mp3');
                         return;
                       }
 
                       if (pinController.text == storedPIN) {
-                        _soundController.playSfx('click sound.mp3');
+                        _soundController.playSfx('audio/sfx/click sound.mp3');
                         if (!dialogContext.mounted) return;
                         Navigator.of(dialogContext).pop();
                         if (!mounted) return;
@@ -160,13 +160,13 @@ class _MainPageState extends State<MainPage> {
                           errorMessage = 'Incorrect PIN!';
                         });
                         pinController.clear();
-                        _soundController.playSfx('click sound.mp3');
+                        _soundController.playSfx('audio/sfx/click sound.mp3');
                       }
                     } catch (e) {
                       setState(() {
                         errorMessage = 'Error verifying PIN: $e';
                       });
-                      _soundController.playSfx('click sound.mp3');
+                      _soundController.playSfx('audio/sfx/click sound.mp3');
                     }
                   },
                   child: const Text('Submit'),
@@ -192,7 +192,7 @@ class _MainPageState extends State<MainPage> {
                 const SizedBox(height: 42),
                 Center(
                   child: Image.asset(
-                    'assets/logo.png',
+                    'assets/images/ui/logo.png',
                     width: 280,
                     height: 95,
                     fit: BoxFit.contain,
@@ -203,7 +203,7 @@ class _MainPageState extends State<MainPage> {
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width * 0.75,
                     child: _menuButton(
-                      imageAsset: 'assets/game icon.png',
+                      imageAsset: 'assets/images/ui/game icon.png',
                       text: 'GAME',
                       onPressed: _navigateToGamePage,
                     ),
@@ -213,7 +213,7 @@ class _MainPageState extends State<MainPage> {
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width * 0.75,
                     child: _menuButton(
-                      imageAsset: 'assets/dashboard icon.png',
+                      imageAsset: 'assets/images/ui/dashboard icon.png',
                       text: 'DASHBOARD',
                       onPressed: _navigateToDashboardPage,
                     ),
@@ -248,7 +248,7 @@ class _MainPageState extends State<MainPage> {
                         Navigator.pop(context);
                       },
                       child: Image.asset(
-                        'assets/back button.png',
+                        'assets/images/ui/back button.png',
                         width: 50,
                         height: 50,
                       ),
@@ -295,7 +295,7 @@ class _MainPageState extends State<MainPage> {
         borderRadius: BorderRadius.circular(30),
         child: ClipOval(
           child: Image.asset(
-            'assets/setting icon.png',
+            'assets/images/ui/setting icon.png',
             width: 50,
             height: 50,
             fit: BoxFit.cover,
